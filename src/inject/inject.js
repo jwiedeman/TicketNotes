@@ -21,6 +21,27 @@ chrome.extension.sendMessage({}, function(response) {
 		// What I need you to do
 		// What I need
 
+		// Applied globally on all textareas with the "autoExpand" class
+            
+		jQuery('#_fid_22').addClass('autoExpand')
+	    $('.autoExpand').attr("data-min-rows", "3");
+
+	    jQuery(document)
+		.one('focus.autoExpand', 'textarea.autoExpand', function(){
+			console.log('one')
+			var savedValue = this.value;
+			this.value = '';
+			this.baseScrollHeight = this.scrollHeight;
+			this.value = savedValue;
+		})
+		.on('input.autoExpand', 'textarea.autoExpand', function(){
+			console.log('on')
+			var minRows = 10, rows;
+			this.rows = minRows;
+			rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 14);
+			this.rows = minRows + rows;
+		})
+
 
 
 		
@@ -30,7 +51,10 @@ chrome.extension.sendMessage({}, function(response) {
 		var notesButtonQuestions = jQuery(`<a class='_h'>LMKIYHAQ</a>`)
 		notesButtonQuestions.insertAfter(notesButtonAnchor)
 		jQuery(notesButtonQuestions).on('click', function () {
-			var inputfield = jQuery("#_fid_22")[0].value += `\nLet me know if you have any questions!`
+			jQuery("#_fid_22").select()
+			jQuery("#_fid_22").trigger("input");
+			var inputfield = jQuery("#_fid_22")[0].value += `\nLet me know if you have any questions!\n\n`
+			
 		})
 
 		
@@ -38,19 +62,25 @@ chrome.extension.sendMessage({}, function(response) {
 		var notesButtonNotes = jQuery(`<a class='_h'>Notes</a>`)
 		notesButtonNotes.insertAfter(notesButtonAnchor)
 		jQuery(notesButtonNotes).on('click', function () {
-			var inputfield = jQuery("#_fid_22")[0].value += `// Notes\n\n\n`
+			jQuery("#_fid_22").select()
+			jQuery("#_fid_22").trigger("input");
+			var inputfield = jQuery("#_fid_22")[0].value += `\n// Notes\n`
 		})
 
 		var notesButtonNeedYou = jQuery(`<a class='_h'>What I need you to do . . .</a>`)
 		notesButtonNeedYou.insertAfter(notesButtonAnchor)
 		jQuery(notesButtonNeedYou).on('click', function () {
-			var inputfield = jQuery("#_fid_22")[0].value += `// What I need you to do\n\n\n`
+			jQuery("#_fid_22").select()
+			jQuery("#_fid_22").trigger("input");
+			var inputfield = jQuery("#_fid_22")[0].value += `\n// What I need you to do\n`
 		})
 
 		var notesButtonNeedYou = jQuery(`<a class='_h'>Further Action Needed . . .</a>`)
 		notesButtonNeedYou.insertAfter(notesButtonAnchor)
 		jQuery(notesButtonNeedYou).on('click', function () {
-			var inputfield = jQuery("#_fid_22")[0].value += `// Further Action needed \n\n\n`
+			jQuery("#_fid_22").select()
+			jQuery("#_fid_22").trigger("input");
+			var inputfield = jQuery("#_fid_22")[0].value += `\n// Further Action needed \n`
 		})
 
 		
@@ -58,61 +88,42 @@ chrome.extension.sendMessage({}, function(response) {
 		var notesButtonIssues = jQuery(`<a class='_h'>Codes Issues</a>`)
 		notesButtonIssues.insertAfter(notesButtonAnchor)
 		jQuery(notesButtonIssues).on('click', function () {
-			var inputfield = jQuery("#_fid_22")[0].value += `// Issues\n\n\n`
+			jQuery("#_fid_22").select()
+			jQuery("#_fid_22").trigger("input");
+			var inputfield = jQuery("#_fid_22")[0].value += `\n// Issues\n`
 		})
 
 		var notesButtonCodesInstalled = jQuery(`<a class='_h'>Codes Installed</a>`)
 		notesButtonCodesInstalled.insertAfter(notesButtonAnchor)
 		jQuery(notesButtonCodesInstalled).on('click', function () {
-			var inputfield = jQuery("#_fid_22")[0].value += `// Codes Installed\n\n\n`
+			jQuery("#_fid_22").select()
+			jQuery("#_fid_22").trigger("input");
+			var inputfield = jQuery("#_fid_22")[0].value += `\n// Codes Installed\n`
 		})
 
 		var notesButtonCodesRemoved = jQuery(`<a class='_h'>Codes Removed</a>`)
 		notesButtonCodesRemoved.insertAfter(notesButtonAnchor)
 		jQuery(notesButtonCodesRemoved).on('click', function () {
-			var inputfield = jQuery("#_fid_22")[0].value += `// Codes Removed\n\n\n`
+			jQuery("#_fid_22").select()
+			jQuery("#_fid_22").trigger("input");
+			var inputfield = jQuery("#_fid_22")[0].value += `\n// Codes Removed\n`
 		})
 
 		var notesButtonClear = jQuery(`<a class='_h'>Clear Field</a>`)
 		notesButtonClear.insertAfter(notesButtonAnchor)
 		jQuery(notesButtonClear).on('click', function () {
+			jQuery("#_fid_22").select()
+			jQuery("#_fid_22").trigger("input");
 			var inputfield = jQuery("#_fid_22")[0].value = ''
 		})
 
 
-		} // edit mode
+		} // edit mode end
 
-		if(window.location.href.includes('?a=dr')){
+		if(window.location.href.includes('?a=dr')){ // read mode begin
 
-		}// read mode
-		setInterval(function () {
-
-		jQuery("#navTop ,#pageNavBarHeader > div.TitleGroup.RightDivider ,#backToReportButton ,#pageNavBarMoreActionsButton ,#emailRecordButton ,#formContents > div:nth-child(2) ,#tdf_75 ,#tdf_108 , #tdf_110, #tdl_110, #tdf_112 , #tdl_114, #tdf_114 ,.SideSpacer").empty()
-		jQuery("#headerDetailPageTitle").replaceWith(jQuery("#headerDetailPageTitle").text().replace('Creative Services Request ',''))
-		jQuery("#tdf_0 , #tdf_3").removeClass();
-		jQuery("#pageNavBar , .RightColumn , .TwoColumn").css({
-			'margin' : '0px',
-			'padding' : '0px'
-		 });
-		 jQuery("#formContents > div:nth-child(1) > div:nth-child(2) > table > tbody > tr:nth-child(1)").empty()
-		 jQuery("#formContents > div:nth-child(1) > div:nth-child(2) > table > tbody > tr:nth-child(4)").empty()
-		 jQuery("#sect_s5 > tbody > tr:nth-child(1)").empty()
-		 jQuery("#sect_s5 > tbody > tr:nth-child(2)").empty()
-		 jQuery("#sect_s5 > tbody > tr:nth-child(3)").empty()
-		 jQuery("#sect_s5 > tbody > tr:nth-child(4)").empty()
-		 jQuery("#sect_s5 > tbody > tr:nth-child(5)").empty()
-		 jQuery("#sect_s5 > tbody > tr:nth-child(6)").empty()
-		 jQuery("#sect_s5 > tbody > tr:nth-child(9)").empty()
-		 jQuery("#sect_s5 > tbody > tr:nth-child(10)").empty()
-		 jQuery("#sect_s5 > tbody > tr:nth-child(11)").empty()
-		 jQuery("#sect_s5 > tbody > tr:nth-child(12)").empty()
-		 jQuery("#brandBarHeader").remove()
-		 jQuery("#stdAddRecButton").remove()
-		 jQuery("#tbl_bkuxkxipn").remove()
-		 jQuery("#tbl_bkuxkxipn ,#tbl_bi4vtu5zm ,#tbl_bi4vtu6j9 ,#tbl_bi4vtu6my ,#tbl_bpicfa3dg ,#tbl_bpu5mgsu5 ,#tbl_bi4vtu6j7 ,#tbl_bm6dvfn45 ,#tbl_bm6dvfn45 ,#tbl_bm79f46jp ,#tbl_bqe6jps7q ,#tbl_bkj94kkir ,#tbl_bksdy38mb").remove()
-
-		}, 500);
-
+		}// read mode end
+		
 		// establish buttons
 		var copyUsernameButton = jQuery(`<a class='submitButton qb-us enhanced-link' id='code_username' >Copy Username</a>`)
 		var copyPasswordButton = jQuery(`<a class='submitButton qb-us enhanced-link' id='code_password' >Copy Password</a>`)
