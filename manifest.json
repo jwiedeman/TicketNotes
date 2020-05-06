@@ -1,9 +1,9 @@
 {
-  "name": "OTTERROCKET",
+  "name": "CHANGE THIS : Extension boilerplate",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "This extension will clean up Quickbase's UI, add a username and password copy button, and more... soon.",
-  "homepage_url": "http://lmgtfy.com",
+  "description": "This extension was created with the awesome extensionizr.com",
+  "homepage_url": "http://extensionizr.com",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -14,22 +14,9 @@
     "page": "src/bg/background.html",
     "persistent": true
   },
-  "options_page": "src/options_custom/index.html",
-  "browser_action": {
-    "default_icon": "icons/icon19.png",
-    "default_title": "browser action demo",
-    "default_popup": "src/browser_action/browser_action.html"
-  },
+  "options_page": "src/options/index.html",
   "permissions": [
-    "clipboardRead",
-    "clipboardWrite",
-    "contentSettings",
-    "cookies",
-    "idle",
-    "management",
-    "notifications",
-    "tabs",
-    "activeTab"
+    "https://logicalposition.quickbase.com/*"
   ],
   "content_scripts": [
     {
@@ -38,18 +25,15 @@
       ],
       "css": [
         "src/inject/inject.css"
-      ],
-      "run_at": "document_end"
+      ]
     },
     {
       "matches": [
         "https://logicalposition.quickbase.com/*"
       ],
       "js": [
-        "js/jquery/jquery.js",
         "src/inject/inject.js"
-      ],
-      "run_at": "document_end"
+      ]
     }
   ]
 }
